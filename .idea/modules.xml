@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/liudaye-springcache4-redis.iml" filepath="$PROJECT_DIR$/liudaye-springcache4-redis.iml" />
-      <module fileurl="file://$PROJECT_DIR$/vv-springcache4-redis.iml" filepath="$PROJECT_DIR$/vv-springcache4-redis.iml" />
     </modules>
   </component>
 </project>
