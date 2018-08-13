@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="20 seconds">
+
+    <property name="logName" value="liudaye-springcache4-redis"/>
+    <property name="socketIp" value="114.112.43.118"/>
+    <!--wx:4321,mg:4322,rd:4323-->
+    <property name="socketPort" value="4321"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %c %M %L %-5level %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <appender name="R" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/${logName}.log</File>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{80} - %msg%n
+            </Pattern>
+        </layout>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <maxHistory>30</maxHistory>
+            <FileNamePattern>logs/${logName}.%d{yyyy-MM-dd}.log.%i</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>500MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="schedule" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/${logName}-schedule.log</File>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{80} - %msg%n
+            </Pattern>
+        </layout>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <maxHistory>30</maxHistory>
+            <FileNamePattern>logs/${logName}-schedule.%d{yyyy-MM-dd}.log.%i</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>500MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!--上传日志-->
+    <appender name="SOCKET" class="ch.qos.logback.classic.net.SocketAppender">
+        <remoteHost>${socketIp}</remoteHost>
+        <port>${socketPort}</port>
+        <reconnectionDelay>10000</reconnectionDelay>
+        <queueSize>10</queueSize>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="R"/>
+        <!--<appender-ref ref="CONSOLE" />-->
+    </root>
+
+    <!-- Mybatis print sql -->
+    <logger name="com.ibatis" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL"/>
+    </logger>
+    <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL"/>
+    </logger>
+    <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL"/>
+    </logger>
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL"/>
+    </logger>
+    <logger name="java.sql.Connection" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL"/>
+    </logger>
+    <logger name="java.sql.Statement" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL"/>
+    </logger>
+    <logger name="java.sql.PreparedStatement" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL"/>
+    </logger>
+
+    <logger name="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" level="INFO"
+            additivity="false">
+        <appender-ref ref="R"/>
+    </logger>
+
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO" additivity="false">
+        <appender-ref ref="R"/>
+    </logger>
+
+    <logger name="org.apache.zookeeper.ClientCnxn" level="INFO" additivity="false">
+        <appender-ref ref="R"/>
+    </logger>
+
+    <logger name="org.springframework.web.bind.annotation.support.HandlerMethodInvoker" level="INFO" additivity="false">
+        <appender-ref ref="R"/>
+    </logger>
+
+    <logger name="com.liudaye.musiclive.filter.EncryptHttpServletResponse" level="INFO" additivity="false">
+        <appender-ref ref="R"/>
+    </logger>
+
+    <logger name="org.apache.commons.beanutils.BeanUtils" level="INFO" additivity="false">
+        <appender-ref ref="R"/>
+    </logger>
+
+    <logger name="net.sf.json.JSONObject" level="ERROR" additivity="false">
+        <appender-ref ref="R"/>
+    </logger>
+
+    <logger name="com.liudaye.vvlive.schedule" level="debug" additivity="false">
+        <appender-ref ref="schedule"/>
+    </logger>
+    <logger name="com.taobao.pamirs.schedule" level="info" additivity="false">
+        <appender-ref ref="schedule"/>
+    </logger>
+</configuration>

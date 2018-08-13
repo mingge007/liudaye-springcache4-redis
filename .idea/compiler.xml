@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="liudaye-springcache4-redis" />
+        <module name="vv-springcache-redis" />
+        <module name="vv-springcache4-redis" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="liudaye-springcache4-redis" target="1.7" />
+      <module name="vv-springcache-redis" target="1.7" />
+      <module name="vv-springcache4-redis" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
